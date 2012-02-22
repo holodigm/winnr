@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  competition_code: MyString
+  code: MyString
+  parameters: MyString
+  draw_type: MyString
+  selection: MyText
+
+two:
+  competition_code: MyString
+  code: MyString
+  parameters: MyString
+  draw_type: MyString
+  selection: MyText

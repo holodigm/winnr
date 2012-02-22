@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Competition code:</b>
+  <%= @draw.competition_code %>
+</p>
+
+<p>
+  <b>Code:</b>
+  <%= @draw.code %>
+</p>
+
+<p>
+  <b>Parameters:</b>
+  <%= @draw.parameters %>
+</p>
+
+<p>
+  <b>Draw type:</b>
+  <%= @draw.draw_type %>
+</p>
+
+<p>
+  <b>Selection:</b>
+  <%= @draw.selection %>
+</p>
+
+
+<%= link_to 'Edit', edit_draw_path(@draw) %> |
+<%= link_to 'Back', draws_path %>

@@ -1,0 +1,31 @@
+<h1>Listing draws</h1>
+
+<table>
+  <tr>
+    <th>Competition code</th>
+    <th>Code</th>
+    <th>Parameters</th>
+    <th>Draw type</th>
+    <th>Selection</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @draws.each do |draw| %>
+  <tr>
+    <td><%= draw.competition_code %></td>
+    <td><%= draw.code %></td>
+    <td><%= draw.parameters %></td>
+    <td><%= draw.draw_type %></td>
+    <td><%= draw.selection %></td>
+    <td><%= link_to 'Show', draw %></td>
+    <td><%= link_to 'Edit', edit_draw_path(draw) %></td>
+    <td><%= link_to 'Destroy', draw, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Draw', new_draw_path %>

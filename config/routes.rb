@@ -1,5 +1,9 @@
 Winnr::Application.routes.draw do
+
+  
   resources :draws
+  require "api"
+  mount Draw::API => "/"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

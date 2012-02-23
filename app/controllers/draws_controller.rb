@@ -1,8 +1,12 @@
 class DrawsController < ApplicationController
+
+	respond_to :json
+
   # GET /draws
   # GET /draws.json
   def index
     @draws = Draw.all
+    @draw = Draw.new
 
     respond_to do |format|
       format.html # index.html.erb

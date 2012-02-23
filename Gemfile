@@ -4,8 +4,12 @@ gem 'rails', '3.2.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'grape'
+
 gem 'sqlite3'
+
+gem 'grape'
+gem 'rack-parser', :require => 'rack/parser'
+
 
 
 # Gems used only for assets and not required
@@ -38,3 +42,11 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+group :test, :development do
+  gem "rspec-rails", "~> 2.4"
+  gem 'capybara'
+  gem "autotest"
+  gem "autotest-rails"
+end
+

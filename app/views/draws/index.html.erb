@@ -1,4 +1,79 @@
-<h1>Listing draws</h1>
+<h1>Draws Mockup</h1>
+<table>
+<tr>
+<td>
+<h2>Instant Win</h2>
+<input id="instant_win" name="commit" type="submit" value="Instant Win">
+
+<%= form_for(@draw) do |f| %>
+  <% if @draw.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@draw.errors.count, "error") %> prohibited this draw from being saved:</h2>
+
+      <ul>
+      <% @draw.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :competition_code %><br />
+    <%= f.text_field :competition_code %>
+  </div>
+  <div class="field">
+    <%= f.label :code %><br />
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :parameters %><br />
+    <%= f.text_field :parameters %>
+  </div>
+  <%= f.hidden_field :draw_type, :value => 'instant' %>
+
+  <div class="actions">
+    <%= f.submit 'Instant Win', :class => 'button' %>
+  </div>
+<% end %>
+</td>
+<td>
+<h2>Set Selection</h2>
+
+<%= form_for(@draw) do |f| %>
+  <% if @draw.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@draw.errors.count, "error") %> prohibited this draw from being saved:</h2>
+
+      <ul>
+      <% @draw.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :competition_code %><br />
+    <%= f.text_field :competition_code %>
+  </div>
+  <div class="field">
+    <%= f.label :code %><br />
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :parameters %><br />
+    <%= f.text_field :parameters %>
+  </div>
+  <%= f.hidden_field :draw_type, :value => 'group' %>
+  <div class="actions">
+    <%= f.submit 'Selection Draw', :class => 'button' %>
+  </div>
+<% end %>
+</td>
+</tr>
+
+
 
 <table>
   <tr>
@@ -27,5 +102,27 @@
 </table>
 
 <br />
+<script>
 
-<%= link_to 'New Draw', new_draw_path %>
+  $(function() {
+    $("#instant_win").click(function() {
+      $.ajax({
+				url: "http://localhost:3000/api/v1/draw",
+				dataType: "json",
+				type: "POST",
+				processData: false,
+				contentType: "application/json",
+				accepts: "application/json",
+				data: "{\"draw\":{\"code\":\"draw1\",\"competition_code\":\"comp1\",\"draw_type\":\"group\"}}",
+				success: function( data ) {
+					if (console && console.log){
+						console.log( 'Sample of data:', data );
+					}
+				}
+			});
+    });
+  });
+  
+</script>
+
+

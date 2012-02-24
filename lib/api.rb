@@ -1,3 +1,4 @@
+require 'random_range'
 class Draw::API < Grape::API
   rescue_from :all
   error_format :json
@@ -14,22 +15,33 @@ class Draw::API < Grape::API
   	end
   
     post '/' do
+
     	@draw = Draw.new(params[:draw])
+
     	if @draw.draw_type == 'instant'
-    		if @draw.save
-			    @draw
-			  else
-			    @draw.errors
-			  end
+    		now = Time.now
+    		selection_range = (now-12.hours)..(now+12.hours)
+    		puts selection_range
+    		random_time = rand_time(@draw.start_date, @draw.end_date)
+    		puts random_time
+    		if selection_range === random_time
+    			@draw.selection = "WINNER"
+    			puts "WINNER"
+    		else
+    			@draw.selection = "NOT WINNER"
+    			puts "NOT WINNER"
+    		end
 	    end
 	    
 	    if @draw.draw_type == 'group'
-	    	if @draw.save
-			    @draw
-			  else
-			    @draw.errors
-			  end
+
 	    end
+	    
+	    if @draw.save
+				@draw
+			else
+				@draw.errors
+			end
     end
 
     get ':id' do
@@ -38,3 +50,4 @@ class Draw::API < Grape::API
   end
     
 end
+

@@ -10,7 +10,8 @@ gem 'sqlite3'
 gem 'grape'
 gem 'rack-parser', :require => 'rack/parser'
 
-
+gem 'will_paginate'
+gem 'rest-client'
 
 # Gems used only for assets and not required
 # in production environments by default.

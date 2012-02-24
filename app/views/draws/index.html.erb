@@ -1,41 +1,9 @@
 <h1>Draws Mockup</h1>
 <table>
 <tr>
-<td>
+<td style='vertical-align:top'>
 <h2>Instant Win</h2>
 <input id="instant_win" name="commit" type="submit" value="Instant Win">
-
-<%= form_for(@draw) do |f| %>
-  <% if @draw.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@draw.errors.count, "error") %> prohibited this draw from being saved:</h2>
-
-      <ul>
-      <% @draw.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :competition_code %><br />
-    <%= f.text_field :competition_code %>
-  </div>
-  <div class="field">
-    <%= f.label :code %><br />
-    <%= f.text_field :code %>
-  </div>
-  <div class="field">
-    <%= f.label :parameters %><br />
-    <%= f.text_field :parameters %>
-  </div>
-  <%= f.hidden_field :draw_type, :value => 'instant' %>
-
-  <div class="actions">
-    <%= f.submit 'Instant Win', :class => 'button' %>
-  </div>
-<% end %>
 </td>
 <td>
 <h2>Set Selection</h2>
@@ -72,15 +40,58 @@
 <% end %>
 </td>
 </tr>
+</table>
 
-
-
+<h2>Winners</h2>
+  <div class="pagination">
+    <div class="page_info" style="float: right">
+      <%= page_entries_info @winning_draws, {:entry_name => 'Draw', :html => false} %>
+    </div>
+    <%= will_paginate @winning_draws, :container => false %>
+  </div>
 <table>
   <tr>
-    <th>Competition code</th>
-    <th>Code</th>
-    <th>Parameters</th>
+    <th>Comp</th>
+    <th>Draw</th>
     <th>Draw type</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Selection</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @winning_draws.each do |draw| %>
+  <tr>
+    <td><%= draw.competition_code %></td>
+    <td><%= draw.code %></td>
+    <td><%= draw.draw_type %></td>
+    <td><%= draw.start_date%></td>
+    <td><%= draw.end_date %></td>
+    <td><%= draw.selection %></td>
+    <td><%= link_to 'Show', draw %></td>
+    <td><%= link_to 'Edit', edit_draw_path(draw) %></td>
+    <td><%= link_to 'Destroy', draw, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<h2>All Draws</h2>
+  <div class="pagination">
+    <div class="page_info" style="float: right">
+      <%= page_entries_info @draws, {:entry_name => 'Draw', :html => false} %>
+    </div>
+    <%= will_paginate @draws, :container => false %>
+  </div>
+<table>
+  <tr>
+    <th>Comp</th>
+    <th>Draw</th>
+    <th>Draw type</th>
+    <th>Start date</th>
+    <th>End date</th>
     <th>Selection</th>
     <th></th>
     <th></th>
@@ -91,8 +102,9 @@
   <tr>
     <td><%= draw.competition_code %></td>
     <td><%= draw.code %></td>
-    <td><%= draw.parameters %></td>
     <td><%= draw.draw_type %></td>
+    <td><%= draw.start_date%></td>
+    <td><%= draw.end_date %></td>
     <td><%= draw.selection %></td>
     <td><%= link_to 'Show', draw %></td>
     <td><%= link_to 'Edit', edit_draw_path(draw) %></td>
@@ -113,7 +125,7 @@
 				processData: false,
 				contentType: "application/json",
 				accepts: "application/json",
-				data: "{\"draw\":{\"code\":\"draw1\",\"competition_code\":\"comp1\",\"draw_type\":\"group\"}}",
+				data: "{\"draw\":{\"code\":\"draw<%=rand(1000)%>\",\"competition_code\":\"comp1\",\"draw_type\":\"instant\",\"start_date\":\"<%=Time.now.beginning_of_day()%>\",\"end_date\":\"<%=Time.now.beginning_of_day() + 7.days%>\"}}",
 				success: function( data ) {
 					if (console && console.log){
 						console.log( 'Sample of data:', data );

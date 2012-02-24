@@ -5,7 +5,8 @@ class DrawsController < ApplicationController
   # GET /draws
   # GET /draws.json
   def index
-    @draws = Draw.all
+    @draws = Draw.paginate(:page => params[:page], :per_page => 50)
+    @winning_draws = Draw.where(:selection => "WINNER").paginate(:page => params[:page], :per_page => 50)
     @draw = Draw.new
 
     respond_to do |format|

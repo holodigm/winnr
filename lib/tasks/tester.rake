@@ -8,9 +8,10 @@ task :test_instant => :environment do
 	while (1..10000) do
 
 		puts "BOOM!"
-		response = RestClient.post url, :draw => { :competition_code => 'comp5',
+		response = RestClient.post url, :draw => { :competition_code => 'comp6',
 																								:code => "draw#{i}",
 																								:draw_type => 'instant',
+																								:hit_size => 60,
 																								:start_date => Time.now.beginning_of_day(),
 																								:end_date => Time.now.beginning_of_day() + 7.days }
 		puts response

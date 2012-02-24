@@ -17,14 +17,16 @@ class Draw::API < Grape::API
     post '/' do
 
     	@draw = Draw.new(params[:draw])
+    	hs = @draw.hit_size
 
     	if @draw.draw_type == 'instant'
+    		#get the entry time
     		now = Time.now
-    		selection_range = (now-12.hours)..(now+12.hours)
-    		puts selection_range
+    		#get your hit target
+    		selection_range = (now-hs.minutes)..(now+hs.minutes)
+    		#select a random time across the draw time range
     		random_time = rand_time(@draw.start_date, @draw.end_date)
-    		puts random_time
-    		if selection_range === random_time
+    		if selection_range.cover?(random_time)
     			@draw.selection = "WINNER"
     			puts "WINNER"
     		else

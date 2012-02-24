@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120224001147) do
+ActiveRecord::Schema.define(:version => 20120224060332) do
 
   create_table "draws", :force => true do |t|
     t.string   "competition_code"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20120224001147) do
     t.datetime "updated_at",       :null => false
     t.datetime "start_date"
     t.datetime "end_date"
+    t.integer  "hit_size"
   end
 
 end

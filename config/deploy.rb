@@ -26,7 +26,9 @@ namespace :deploy do
   task :start do ; end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "touch #{File.join(current_path,'tmp','restart.txt')}"
+    run "cd #{deploy_to}/current && bundle install"
+    run "start-stop-daemon --stop -n nginx"
+    run "cd #{deploy_to}/current && passenger start -a 127.0.0.1 -p 3000 -d -e #{environment}"
   end
 end
 

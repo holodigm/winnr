@@ -171,6 +171,7 @@ DEPENDENCIES
   grape
   jquery-rails
   rack-parser
+  rack-ssl
   rails (= 3.2.1)
   rest-client
   rspec-rails (~> 2.4)

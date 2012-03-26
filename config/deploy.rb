@@ -26,9 +26,9 @@ namespace :deploy do
   task :start do ; end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "cd #{deploy_to}/current && bundle install"
+    run "cd #{deploy_to}/current && /home/sysadmin/.rvm/bin/rvm use 1.9.3 && bundle install"
     run "start-stop-daemon --stop -n nginx"
-    run "cd #{deploy_to}/current && passenger start -a 127.0.0.1 -p 3000 -d -e #{environment}"
+    run "passenger start -a 127.0.0.1 -p 3001 -d -e #{environment}"
   end
 end
 

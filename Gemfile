@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'rack-ssl', :require => 'rack/ssl'
+
 gem 'rails', '3.2.1'
 
 # Bundle edge Rails instead:

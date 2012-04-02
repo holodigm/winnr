@@ -28,15 +28,13 @@ class Draw::API < Grape::API
     		random_time = rand_time(@draw.start_date, @draw.end_date)
     		if selection_range.cover?(random_time)
     			@draw.selection = "WINNER"
-    			puts "WINNER"
     		else
     			@draw.selection = "NOT WINNER"
-    			puts "NOT WINNER"
     		end
 	    end
 	    
 	    if @draw.draw_type == 'group'
-
+	        @draw.selection = @draw.params.sort_by{rand}[0..@draw.major_draw_size]
 	    end
 	    
 	    if @draw.save

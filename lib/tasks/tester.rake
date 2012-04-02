@@ -4,7 +4,7 @@ task :test_instant => :environment do
   require 'uri'
   require 'rest-client'
 	i=1
-	url ="http://localhost:3001/api/v1/draw"
+	url ="https://winnr.api:7443/api/v1/draw"
 	while (1..10000) do
 
 
@@ -19,6 +19,7 @@ task :test_instant => :environment do
 		puts @data.to_yaml
 		
 		i = i+1
+		
 	end
 
 end

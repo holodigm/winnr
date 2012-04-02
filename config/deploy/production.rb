@@ -1,5 +1,5 @@
 
 set :branch, 'master'
-role :web, "192.168.1.8"                          # Your HTTP server, Apache/etc
-role :app, "192.168.1.8"                          # This may be the same as your `Web` server
-role :db,  "192.168.1.8", :primary => true # This is where Rails migrations will run
+role :web, "211.26.139.55"                          # Your HTTP server, Apache/etc
+role :app, "211.26.139.55"                          # This may be the same as your `Web` server
+role :db,  "211.26.139.55", :primary => true # This is where Rails migrations will run

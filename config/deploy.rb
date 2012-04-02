@@ -27,5 +27,3 @@ namespace :deploy do
   end
 end
 
-# Install after hooks for deployment.
-after "deploy", "deploy:cleanup"
